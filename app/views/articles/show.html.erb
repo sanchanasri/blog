@@ -9,7 +9,7 @@
 </ul>
 <h2>Comments</h2>
 <% @article.comments.each do |comment| %>
-  <% unless article.archived? %>
+
   <p>
     <strong>Commenter:</strong>
     <%= comment.commenter %>
@@ -20,7 +20,7 @@
     <%= comment.body %>
   </p>
     <%end %>
-  <% end %>
+
 <h2>Add a comment:</h2>
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
   <p>

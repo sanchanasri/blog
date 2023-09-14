@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @post %>
+<br>
+<div>
+  <%= link_to "Edit this post", edit_topic_post_path(@topic,@post) %> <br><br>
+  <%= link_to "Back to posts", topic_path(@topic) %><br><br>
+
+  <%= link_to 'Destroy', topic_post_path(@topic, @post), data: {
+  turbo_method: :delete,
+  turbo_confirm: "Are you sure?",
+  }, style: "text-decoration: none; color: #ff0000; font-weight: bold; margin-right: 10px;" %>
+
+</div>

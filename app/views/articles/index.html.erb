@@ -1,6 +1,10 @@
 <h1>Articles</h1>
 
 Our blog has <%= Article.public_count %> articles and counting!!
+
+<div>
+  <%= link_to "View topics", topics_path %>
+</div>
 <ul>
   <% @article.each do |article| %>
     <% unless article.archived? %>
