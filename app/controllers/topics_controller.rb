@@ -65,6 +65,8 @@ class TopicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def topic_params
+
       params.require(:topic).permit(:name, :description)
+
     end
 end
