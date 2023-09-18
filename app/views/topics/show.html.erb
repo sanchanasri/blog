@@ -1,0 +1,44 @@
+<p style="color: green"><%= notice %></p>
+<%= stylesheet_link_tag 'buttonStyle', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= render @topic %>
+
+
+
+
+<table style="margin: 0 auto; width: 80%; border-collapse: collapse; text-align: center;">
+  <thead>
+  <tr>
+    <th style="background-color: #007bff; color: #fff; padding: 10px;">Posts under <%=@topic.name %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @topic.posts.each do |post| %>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 10px;">
+        <%= link_to post.name, topic_post_path(@topic, post), style: "text-decoration: none; color: #333; font-weight: bold;" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<p style="text-align: center;">
+  <%= link_to "Create post", new_topic_post_path(@topic), style: "text-decoration: none; font-weight: bold; background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px;" %>
+</p>
+
+<br><br>
+<div class="btn-toolbar" role="toolbar" aria-label="Post Actions">
+  <div class="btn-group" role="group">
+    <center>
+
+    <%= link_to "Edit this topic", edit_topic_path(@topic), class: "custom-btn yellow-btn" %>
+    <%= link_to "Back", topics_path, class: "custom-btn black-btn" %>
+    <%= link_to "Destroy", topics_path, data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?",
+    }, class: "custom-btn red-btn destroy-link" %>
+    </center>
+  </div>
+
+</div>

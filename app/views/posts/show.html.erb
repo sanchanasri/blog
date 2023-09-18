@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+<%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<%= render @post %>
+<br>
+
+
+
+<div class="btn-toolbar" role="toolbar" aria-label="Post Actions">
+  <div class="btn-group mr-2" role="group">
+    <%= link_to "Edit this post", edit_topic_post_path(@post.topic_id,@post), class: "custom-btn yellow-btn" %>
+  </div><br>
+  <div class="btn-group" role="group">'
+    <%if params[:topic_id] %>
+    <%= link_to "Back to posts", topic_path(@post.topic_id,@post), class: "custom-btn black-btn" %>
+      <%else %>
+      <%= link_to "Back", all_posts_path, class: "custom-btn black-btn" %>
+      <%end %>
+      <%= link_to "Destroy", topic_post_path(@post.topic_id, @post), data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?",
+    }, class: "custom-btn red-btn destroy-link" %>
+  </div>
+</div>
+
+<h2>Comments</h2>
+<% @comments.each do |comment| %>
+  <div class="comment-box">
+    <p><strong>Commenter: </strong><%= comment.name %></p>
+    <p><strong>Comment: </strong><%= comment.description %></p>
+  </div>
+<% end %>
+<br>
+<%= link_to "Create comment", new_topic_post_post_comment_path(@post.topic_id, @post), style: "background-color: blue; color: white; padding: 10px; text-decoration: none; border: none; border-radius: 5px;" %>
+
+<%= render 'tags/show' ,tag:@post%>
+
+
+
+
+
+

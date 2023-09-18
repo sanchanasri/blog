@@ -1,13 +1,36 @@
-<h1>Articles</h1>
+<!-- app/views/articles/index.html.erb -->
+<%= stylesheet_link_tag 'articleStyle', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-Our blog has <%= Article.public_count %> articles and counting!!
-<ul>
-  <% @article.each do |article| %>
-    <% unless article.archived? %>
-    <li>
-      <%= link_to article.title, article %>
-    </li>
+
+<centre><h2>Blog</h2></centre>
+
+
+
+        <td><%= link_to "View Topics", topics_path %></td><br><br>
+
+        <td><%= link_to "View All Posts", all_posts_path %></td><br><br>
+
+
+
+<table style="margin: 0 auto; width: 80%; border-collapse: collapse; text-align: center;">
+  <thead>
+  <tr>
+    <th style="background-color: #007bff; color: #fff; padding: 10px;">Article Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @articles.each do |topic| %>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 10px;">
+        <%= link_to topic.title, topic, style: "text-decoration: none; color: #333; font-weight: bold;" %>
+      </td>
+    </tr>
   <% end %>
-    <%end %>
-</ul>
-<%= link_to "New Article", new_article_path %>
+  </tbody>
+</table>
+<br><br>
+<p style="text-align: center;">
+  <%= link_to "New article", new_article_path, style: "text-decoration: none; font-weight: bold; background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px;" %>
+</p>
+
+

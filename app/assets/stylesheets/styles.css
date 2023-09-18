@@ -1,0 +1,76 @@
+/* Center the entire content */
+body {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Style the post table */
+table {
+    margin: 0 auto; /* Center the table horizontally */
+    border-collapse: collapse;
+    width: 80%; /* Adjust the width as needed */
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+th {
+    background-color: #f2f2f2; /* Header row background color */
+}
+
+/* Style the comment boxes */
+.comment-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Style links */
+a {
+    text-decoration: none;
+    color: #0000ff;
+}
+
+/* Style the "Destroy" link */
+a.destroy-link {
+    color: #ff0000;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Style the success notice */
+p.notice {
+    color: green;
+}
+
+/* Custom button classes */
+
+.custom-btn {
+    background-color: transparent;
+    border: 2px solid black;
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px; /* Adjust padding as needed */
+    text-align: center;
+    display: inline-block;
+    font-size: 16px; /* Adjust font size as needed */
+}
+
+.yellow-btn {
+    background-color: yellow;
+    color: black; /* Change text color for visibility */
+}
+
+.red-btn {
+    background-color: white;
+    color: red; /* White text for better contrast */
+}
+
+.black-btn {
+    background-color: gray;
+    color: white; /* White text for better contrast */
+}
+
