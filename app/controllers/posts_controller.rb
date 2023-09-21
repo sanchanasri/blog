@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
-  before_action :set_post_and_topic, only: %i[ show new edit update destroy ]
-  before_action :set_topic, only: %i[index]
+  before_action :set_post_and_topic, only: %i[ show edit update destroy ]
+
   # GET /posts or /posts.json
   def index
     if params[:topic_id]
-       @posts = @topic.posts
+      @pagy,@posts = pagy(@topic.posts, items:10)
     else
-      @posts=Post.all
+      @pagy, @posts=pagy(Post.includes(:topic).all, items:10)
     end
   end
 
@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    @topic=Topic.find(params[:topic_id])
       @post=Post.new
   end
 

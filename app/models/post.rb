@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  belongs_to :topic
+  belongs_to :topic,optional:true
   has_many :post_comments, dependent: :destroy
   has_and_belongs_to_many :tags
 

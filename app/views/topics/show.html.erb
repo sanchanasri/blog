@@ -12,10 +12,10 @@
   </tr>
   </thead>
   <tbody>
-  <% @topic.posts.each do |post| %>
+    <% @posts.each do |post| %>
     <tr>
       <td style="border: 1px solid #ddd; padding: 10px;">
-        <%= link_to post.name, topic_post_path(@topic, post), style: "text-decoration: none; color: #333; font-weight: bold;" %>
+        <%= link_to "#{post.name}", topic_post_path(@topic, post), style: "text-decoration: none; color: #333; font-weight: bold;" %>
       </td>
     </tr>
   <% end %>
@@ -25,8 +25,32 @@
 
 <p style="text-align: center;">
   <%= link_to "Create post", new_topic_post_path(@topic), style: "text-decoration: none; font-weight: bold; background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px;" %>
-</p>
+</p><br>
+<center>
 
+
+<nav class="pagy-nav pagination">
+  <% if @pagy.prev %>
+    <%= link_to 'Prev', url_for(@pagy.vars[:params].merge(page: @pagy.prev)), class: 'page prev' %>
+  <% else %>
+    <span class="page prev disabled">&lsaquo;&nbsp;Prev</span>
+  <% end %>
+
+  <% @pagy.series.each do |item| %>
+    <% if item.is_a?(Integer) %>
+      <%= link_to item, url_for(@pagy.vars[:params].merge(page: item)), class: 'page' %>
+    <% else %>
+      <span class="page gap"><%= item %></span>
+    <% end %>
+  <% end %>
+
+  <% if @pagy.next %>
+    <%= link_to 'Next', url_for(@pagy.vars[:params].merge(page: @pagy.next)), class: 'page next' %>
+  <% else %>
+    <span class="page next disabled">Next&nbsp;&rsaquo;</span>
+  <% end %>
+</nav>
+</center>
 <br><br>
 <div class="btn-toolbar" role="toolbar" aria-label="Post Actions">
   <div class="btn-group" role="group">
@@ -42,3 +66,4 @@
   </div>
 
 </div>
+
