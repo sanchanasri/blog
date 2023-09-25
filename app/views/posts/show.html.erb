@@ -1,5 +1,14 @@
 <p style="color: green"><%= notice %></p>
 <%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="circular-image">
+  <%= image_tag @post.image, class: 'circular-image' if @post.image.attached? %>
+</div>
+<br>
+
+
+<% if @post.image.attached? %>
+  <%= button_to 'Remove Image ', remove_image_topic_post_path(@post.topic, @post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+<% end %>
 
 <%= render @post %>
 <br>

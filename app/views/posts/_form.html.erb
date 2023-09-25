@@ -17,8 +17,10 @@
   </div>
 
   <%= render 'tags/new', form: form, post: @post %>
-
-
+<div>
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+</div><br><br>
   <div>
     <%= form.submit %>
   </div>

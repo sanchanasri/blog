@@ -27,7 +27,14 @@ th {
     margin: 10px;
     background-color: #f9f9f9;
 }
-
+.circular-image {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 150px;
+    border-radius: 50%; /* This makes the image circular */
+    object-fit: cover; /* Ensure the image covers the circular container */
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+}
 /* Style links */
 a {
     text-decoration: none;

@@ -7,9 +7,15 @@ Rails.application.routes.draw do
   resources :articles
   resources :topics do
     resources :posts do
+      member do
+        delete 'remove_image' , to: 'posts#remove_image'
+      end
       resources :post_comments
       resources :ratings
-      resources :tags, only: [:index, :show, :new, :create, :update] # Define the routes for TagsController here
+      resources :tags, only: [:index, :show, :new, :create, :update]
+      member do
+        delete 'remove_image'
+      end
     end
   end
 end

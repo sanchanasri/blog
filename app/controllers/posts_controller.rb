@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post_and_topic, only: %i[ show edit update destroy ]
+  before_action :set_post_and_topic, only: %i[ show edit update destroy remove_image]
 
   # GET /posts or /posts.json
   def index
@@ -14,6 +14,13 @@ class PostsController < ApplicationController
   def show
       @comments= @post.post_comments
   end
+
+
+  def remove_image
+    @post.image.purge
+    redirect_to @post, notice: 'Image removed successfully.'
+  end
+
 
   # GET /posts/new
   def new
@@ -44,6 +51,7 @@ class PostsController < ApplicationController
     end
     if @post.save
       @post.tags << Tag.where(id: params[:post][:tag_ids])
+      @post.image.attach(params[:post][:image])
       redirect_to topic_post_path(@post.topic_id,@post)
     else
       render :new
@@ -53,6 +61,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     @post.tags = Tag.where(id: params[:post][:tag_ids])
+    @post.image.attach(params[:post][:image])
     if @post.update(post_params)
       redirect_to topic_post_path(@post.topic_id,@post)
     else
@@ -84,7 +93,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:name, :description, :topic_id, :tag_id)
+      params.require(:post).permit(:name, :description, :topic_id, :tag_id, :image)
     end
 
   def set_topic
