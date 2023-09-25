@@ -36,5 +36,12 @@ RSpec.describe Post, type: :model do
     post.description=nil
     expect(post).to_not be_valid
   end
+  describe "insert post with an image" do
+    it" create post with image" do
+      image= Image.new
+      post.image= image
+      expect(post).to be_valid
+    end
+  end
 
 end

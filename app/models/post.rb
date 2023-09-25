@@ -11,7 +11,5 @@ class Post < ApplicationRecord
     ratings.group(:value).count
   end
 
-  def remove_image
-    image.purge if image.attached?
-  end
+
 end
