@@ -16,6 +16,11 @@
     <%= f.password_field :password, autocomplete: "new-password", style: "width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; transition: border-color 0.3s;" %>
   </div>
 
+  <div>
+    <%=f.label :name %>
+    <%=f.text_field :name %>
+  </div>
+
   <div class="field" style="margin-bottom: 15px;">
     <%= f.label :password_confirmation, style: "font-weight: bold;" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", style: "width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;" %>

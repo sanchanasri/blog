@@ -3,13 +3,13 @@
 <%= form_with(model: [@post, PostComment.new], url: topic_post_post_comments_path(@post.topic, @post), method: :post) do |form| %>
   <div>
     <%= form.label :name %><br>
-    <%= form.text_field :name , name: 'post_comment[name]'%>
+    <%= form.text_field :name , value:current_user.name%>
   </div>
   <div>
     <%= form.label :description %><br>
     <%= form.text_area :description , name: 'post_comment[description]' %>
   </div>
   <div>
-    <%= form.submit "Create comment" %>
+    <%= form.submit %>
   </div>
 <% end %>

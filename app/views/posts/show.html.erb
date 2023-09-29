@@ -16,21 +16,26 @@
 
 
 <div class="btn-toolbar" role="toolbar" aria-label="Post Actions">
+  <%if can? :edit, @post %>
   <div class="btn-group mr-2" role="group">
     <%= link_to "Edit this post", edit_topic_post_path(@post.topic_id,@post), class: "custom-btn yellow-btn" %>
   </div><br>
+    <%end %>
   <div class="btn-group" role="group">'
     <%if params[:topic_id] %>
     <%= link_to "Back to posts", topic_path(@post.topic_id,@post), class: "custom-btn black-btn" %>
       <%else %>
       <%= link_to "Back", all_posts_path, class: "custom-btn black-btn" %>
       <%end %>
+    <%if can? :destroy, @post %>
       <%= link_to "Destroy", topic_post_path(@post.topic_id, @post), data: {
       turbo_method: :delete,
       turbo_confirm: "Are you sure?",
     }, class: "custom-btn red-btn destroy-link" %>
+      <%end %>
   </div>
 </div>
+
 <br>
 <div class="rating-display">
   <h3>Ratings:</h3>
@@ -57,8 +62,12 @@
 <h2>Comments</h2>
 <% @comments.each do |comment| %>
   <div class="comment-box">
-    <p><strong>Commenter: </strong><%= comment.name %></p>
+    <p><strong>Comment: </strong><%= comment.user.name %></p>
     <p><strong>Comment: </strong><%= comment.description %></p>
+    <%if can? :edit, comment %>
+    <%= link_to 'Edit', edit_topic_post_post_comment_path(@post.topic_id, @post, comment) %>
+    <%= button_to 'Delete', [@post, comment], method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
+      <%end %>
   </div>
 <% end %>
 <br>

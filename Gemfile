@@ -14,6 +14,7 @@ gem "sqlite3", "~> 1.4"
 gem "image_processing", ">= 1.2"
 gem "aws-sdk-s3", require: false
 gem 'devise'
+gem 'cancancan'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"

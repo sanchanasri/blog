@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_25_102211) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_29_062901) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -63,7 +63,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_102211) do
     t.integer "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["post_id"], name: "index_post_comments_on_post_id"
+    t.index ["user_id"], name: "index_post_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -72,7 +74,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_102211) do
     t.integer "topic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["topic_id"], name: "index_posts_on_topic_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "posts_tags", id: false, force: :cascade do |t|
@@ -111,6 +115,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_102211) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -119,7 +124,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_102211) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "articles"
   add_foreign_key "post_comments", "posts"
+  add_foreign_key "post_comments", "users"
   add_foreign_key "posts", "topics"
+  add_foreign_key "posts", "users"
   add_foreign_key "posts_tags", "posts"
   add_foreign_key "posts_tags", "tags"
   add_foreign_key "ratings", "posts"
