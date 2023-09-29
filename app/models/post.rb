@@ -12,6 +12,13 @@ class Post < ApplicationRecord
   def ratings_by_value
     ratings.group(:value).count
   end
+  def average_rating
+    if ratings.present?
+    ratings.average(:value)
+    else
+      0.0
+      end
+  end
 
 
 end

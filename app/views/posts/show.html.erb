@@ -37,6 +37,7 @@
 </div>
 
 <br>
+<h3>Average rating : <%= number_with_precision(@post.average_rating, precision: 2)%></h3>
 <div class="rating-display">
   <h3>Ratings:</h3>
 <%@post.ratings_by_value .each do |value,count| %>
@@ -58,7 +59,7 @@
   <% end %>
 </div>
 
-
+<h3>This post has <%=@post.post_comments.count %> comments</h3>
 <h2>Comments</h2>
 <% @comments.each do |comment| %>
   <div class="comment-box">
@@ -73,7 +74,7 @@
 <br>
 <%= link_to "Create comment", new_topic_post_post_comment_path(@post.topic_id, @post), style: "background-color: blue; color: white; padding: 10px; text-decoration: none; border: none; border-radius: 5px;" %>
 
-<%= render 'tags/show' ,tag:@post%>
+<%= render 'tags/show' ,tag:@post%><br>
 
 
 
