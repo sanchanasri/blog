@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "articles#index"
   get '/posts', to: 'posts#index', as: 'all_posts'
   resources :posts do

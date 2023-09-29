@@ -39,9 +39,19 @@
   <% end %>
 </div>
 <br><br>
-<%= link_to new_topic_post_rating_path(@post.topic, @post), class: "btn btn-primary" do %>
-  Rate this post
-<% end %>
+<div class="container">
+  <%= form_for [@post.topic, @post, Rating.new] do |f| %>
+    <h2>Rate this post</h2>
+    <div class="form-group rating">
+      <% (1..5).each do |value| %>
+        <%= f.radio_button :value, value %>
+        <%= label "r #{value}", "#{value} star" %><br><br>
+      <% end %>
+    </div>
+    <br>
+    <%= f.submit "Submit Rating", class: "btn btn-primary" %>
+  <% end %>
+</div>
 
 
 <h2>Comments</h2>

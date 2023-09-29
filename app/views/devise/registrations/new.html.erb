@@ -1,0 +1,27 @@
+<h2 style="font-size: 24px; margin-bottom: 20px;">Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field" style="margin-bottom: 15px;">
+    <%= f.label :email, style: "font-weight: bold;" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;" %>
+  </div>
+
+  <div class="field" style="margin-bottom: 15px;">
+    <%= f.label :password, style: "font-weight: bold;" %>
+    <% if @minimum_password_length %>
+      <em style="font-size: 14px;">(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password", style: "width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; transition: border-color 0.3s;" %>
+  </div>
+
+  <div class="field" style="margin-bottom: 15px;">
+    <%= f.label :password_confirmation, style: "font-weight: bold;" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", style: "width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;" %>
+  </div>
+
+  <div class="actions" style="text-align: center;">
+    <%= f.submit "Sign up", style: "background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;" %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<h2 style="font-size: 24px; margin-bottom: 20px;">Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field" style="margin-bottom: 15px;">
+    <%= f.label :email, style: "font-weight: bold;" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;" %>
+  </div>
+
+  <div class="field" style="margin-bottom: 15px;">
+    <%= f.label :password, style: "font-weight: bold;" %><br />
+    <%= f.password_field :password, autocomplete: "current-password", style: "width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; transition: border-color 0.3s;" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field" style="margin-bottom: 15px;">
+      <%= f.check_box :remember_me, style: "margin-right: 5px;" %>
+      <%= f.label :remember_me, style: "font-weight: normal;" %>
+    </div>
+  <% end %>
+  <%= link_to "Forgot your password?", new_password_path(resource_name), style: "text-decoration: none; color: #007bff; font-weight: bold;" %>
+
+  <div class="actions" style="text-align: center;">
+    <%= f.submit "Log in", style: "background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;" %>
+  </div>
+
+<br><br>
+  <div class="actions" style="text-align: center;">
+    <%= link_to "Sign up", new_user_registration_path, style: "background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;" %>
+  </div>
+
+<% end %>
