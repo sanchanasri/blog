@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       member do
         delete 'remove_image' , to: 'posts#remove_image'
       end
+      post 'mark_as_read', on: :member
       resources :post_comments
       resources :ratings
       resources :tags, only: [:index, :show, :new, :create, :update]

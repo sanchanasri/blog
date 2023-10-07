@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
     user ||= User.new # Guest user
-
+    can :mark_as_read, Post
     can :read, Post
     can :create, Post
     can :update, Post, user_id: user.id # Correctly reference user_id

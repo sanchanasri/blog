@@ -1,42 +1,4 @@
-<table style="margin: 0 auto; width: 80%; border-collapse: collapse; text-align: center;">
-  <thead>
-  <tr>
-    <th style="background-color: #007bff; color: #fff; padding: 10px;">Posts</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @posts.each do |post| %>
-    <tr>
-      <td style="border: 1px solid #ddd; padding: 10px;">
-        <%= link_to "#{post.name} (#{post.topic.name})", post, style: "text-decoration: none; color: #333; font-weight: bold;" %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table><br><br>
-<center>
-<nav class="pagy-nav pagination">
-  <% if @pagy.prev %>
-    <%= link_to 'Prev', url_for(@pagy.vars[:params].merge(page: @pagy.prev)), class: 'page prev' %>
-  <% else %>
-    <span class="page prev disabled">&lsaquo;&nbsp;Prev</span>
-  <% end %>
-
-  <% @pagy.series.each do |item| %>
-    <% if item.is_a?(Integer) %>
-      <%= link_to item, url_for(@pagy.vars[:params].merge(page: item)), class: 'page' %>
-    <% else %>
-      <span class="page gap"><%= item %></span>
-    <% end %>
-  <% end %>
-
-  <% if @pagy.next %>
-    <%= link_to 'Next', url_for(@pagy.vars[:params].merge(page: @pagy.next)), class: 'page next' %>
-  <% else %>
-    <span class="page next disabled">Next&nbsp;&rsaquo;</span>
-  <% end %>
-</nav>
-</center><br>
+<%= render 'index' %>
 <p style="text-align: center;">
   <%= link_to "Back", root_path, style: "text-decoration: none; font-weight: bold; background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px;" %>
 </p>

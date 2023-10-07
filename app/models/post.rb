@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_and_belongs_to_many :tags
   has_one_attached :image
+  has_and_belongs_to_many :users
 
   validates :name, presence: true, length: {maximum: 250}
   validates :description, presence: true
@@ -19,6 +20,10 @@ class Post < ApplicationRecord
       0.0
       end
   end
-
+  def unread?
+    # Implement your logic here to determine if the post is unread
+    # For example, you can check if the post is associated with the current_user
+    !user.posts.include?(self) # Assuming you have a user association
+  end
 
 end

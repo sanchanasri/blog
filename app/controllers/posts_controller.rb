@@ -1,8 +1,22 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_post_and_topic, only: %i[ show edit update destroy remove_image]
+  before_action :set_post_and_topic, only: %i[ show edit update destroy remove_image mark_as_read]
 
   # GET /posts or /posts.json
+
+
+
+  def mark_as_read
+    if current_user.posts << @post
+      render json: { status: :success }
+    else
+      render json: { status: :error, error: 'Failed to mark post as read' }, status: :unprocessable_entity
+    end
+  end
+
+
+
+
   def index
     if params[:topic_id]
       @pagy,@posts = pagy(@topic.posts, items:10)

@@ -1,0 +1,15 @@
+// app/views/posts/show.js.erb
+document.addEventListener("DOMContentLoaded", function() {
+    var postLinks = document.querySelectorAll(".mark-as-read");
+
+    postLinks.forEach(function(postLink) {
+        postLink.addEventListener("ajax:success", function() {
+            var postStatus = this.nextElementSibling; // Assuming the status span immediately follows the link
+
+            if (postStatus && postStatus.classList.contains("unread")) {
+                postStatus.textContent = "Read"; // Update the status span text
+                postStatus.classList.remove("unread"); // Remove the "unread" class
+            }
+        });
+    });
+});
