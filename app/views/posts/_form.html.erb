@@ -1,5 +1,6 @@
-<%= form_with(model: [@topic, @post] ) do |form| %>
+<%= form_with(model: [@topic, @post] , remote: true) do |form| %>
 
+  <div class="errors"></div>
 
   <div>
     <%= form.label :name, style: "display: block" %>

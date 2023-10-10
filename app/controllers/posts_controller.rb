@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource
   before_action :set_post_and_topic, only: %i[ show edit update destroy remove_image mark_as_read]
 
   # GET /posts or /posts.json
@@ -28,6 +27,7 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
       @comments= @post.post_comments
+      @comment_rating = UserCommentRating.new
   end
 
 
@@ -52,8 +52,7 @@ class PostsController < ApplicationController
   def create
     if params[:topic_id]
       @topic=Topic.find(params[:topic_id])
-      @post = @topic.posts.new(post_params)
-      @post.topic=@topic
+      @post = @topic.posts.build(post_params)
     else
       @post=Post.new(post_params)
     end
@@ -65,14 +64,15 @@ class PostsController < ApplicationController
       end
     end
     @post.user= current_user
-    if @post.save
-      @post.tags << Tag.where(id: params[:post][:tag_ids])
-      @post.image.attach(params[:post][:image])
-
-      redirect_to topic_post_path(@post.topic_id,@post)
-    else
-      render :new
-    end
+    @post.tags << Tag.where(id: params[:post][:tag_ids])
+    @post.image.attach(params[:post][:image])
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to @post }
+      else
+        render :new
+      end
+      end
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json

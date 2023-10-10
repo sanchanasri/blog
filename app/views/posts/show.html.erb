@@ -63,14 +63,18 @@
 <h2>Comments</h2>
 <% @comments.each do |comment| %>
   <div class="comment-box">
-    <p><strong>Comment: </strong><%= comment.user.name %></p>
+    <p><strong>Commenter: </strong><%= comment.user.name %></p>
     <p><strong>Comment: </strong><%= comment.description %></p>
+    <%= render 'user_comment_ratings/new', comment:comment %>
     <%if can? :edit, comment %>
     <%= link_to 'Edit', edit_topic_post_post_comment_path(@post.topic_id, @post, comment) %>
     <%= button_to 'Delete', [@post, comment], method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
+      <br>
+      <%=link_to 'Rated users', topic_post_post_comment_user_comment_ratings_path(@post.topic, @post, comment) %>
       <%end %>
   </div>
 <% end %>
+
 <br>
 <%= link_to "Create comment", new_topic_post_post_comment_path(@post.topic_id, @post), style: "background-color: blue; color: white; padding: 10px; text-decoration: none; border: none; border-radius: 5px;" %>
 

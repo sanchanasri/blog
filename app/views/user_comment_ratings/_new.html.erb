@@ -1,0 +1,15 @@
+<h3>Rate comment</h3>
+<%= form_with(model: [@post.topic,@post,comment, @comment_rating], url: topic_post_post_comment_user_comment_ratings_path(@post.topic, @post, comment), method: :post) do |f| %>
+  <div class="field">
+    <div class="rating">
+      <% (1..5).each do |r| %>
+        <%= f.radio_button :CommentRating, r %>
+        <%= f.label :CommentRating, "#{r} star" %><br>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <%= f.submit 'submit comment rating' %>
+  </div>
+<% end %>
+<br>

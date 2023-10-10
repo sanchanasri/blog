@@ -35,6 +35,7 @@ module Untitled3
     config.generators.system_tests = nil
     config.assets.precompile += %w( post_detail.js.erb )
 
+
   end
 
 end

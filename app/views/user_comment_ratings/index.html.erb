@@ -1,0 +1,8 @@
+<h2>Ratings</h2>
+<ul>
+  <% @comment.user_comment_ratings.each do |rating| %>
+
+      <strong><%= rating.user.email %></strong> rated this comment: <%= rating.CommentRating %>
+    <br>
+  <% end %>
+</ul>

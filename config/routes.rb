@@ -12,7 +12,9 @@ Rails.application.routes.draw do
         delete 'remove_image' , to: 'posts#remove_image'
       end
       post 'mark_as_read', on: :member
-      resources :post_comments
+      resources :post_comments do
+        resources :user_comment_ratings
+      end
       resources :ratings
       resources :tags, only: [:index, :show, :new, :create, :update]
       member do

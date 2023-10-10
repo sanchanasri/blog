@@ -1,12 +1,39 @@
+<div id="notice-container"></div>
 <h1>New post</h1>
+<%= form_with(model: [@topic, @post]) do |form| %>
 
-<%= render "form", post: @post %>
+  <div class="errors"></div>
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :topic_id, style: "display: block" %>
+    <%= form.text_field :topic_id %>
+  </div>
+
+  <%= render 'tags/new', form: form, post: @post %>
+
+
+  <div>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div><br><br>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
 
 <br>
-
-
-
-
+<div id="loading-indicator" style="display: none;"></div>
+<div id="error-messages"></div>
 <div>
   <%= link_to "Back", topic_path(topic_id=@topic.id) %>
 </div>

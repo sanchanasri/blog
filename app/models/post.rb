@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_and_belongs_to_many :users
 
-  validates :name, presence: true, length: {maximum: 250}
+  validates :name, presence: true, length: {maximum: 20}
   validates :description, presence: true
 
   def ratings_by_value
