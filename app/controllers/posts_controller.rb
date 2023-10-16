@@ -1,9 +1,8 @@
+
 class PostsController < ApplicationController
   before_action :set_post_and_topic, only: %i[ show edit update destroy remove_image mark_as_read]
 
   # GET /posts or /posts.json
-
-
 
   def mark_as_read
     if current_user.posts << @post
@@ -13,21 +12,16 @@ class PostsController < ApplicationController
     end
   end
 
-
-
-
   def index
-    if params[:topic_id]
-      @pagy,@posts = pagy(@topic.posts, items:10)
-    else
-      @pagy, @posts=pagy(Post.includes(:topic).all, items:10)
+    unless params[:topic_id]
+      @pagy, @posts = pagy(Post.includes(:topic).all, items: 10)
     end
   end
 
   # GET /posts/1 or /posts/1.json
   def show
-      @comments= @post.post_comments
-      @comment_rating = UserCommentRating.new
+    @comment_rating= UserCommentRating.new
+    @comments= @post.post_comments.includes(:user)
   end
 
 
@@ -40,12 +34,11 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @topic=Topic.find(params[:topic_id])
-      @post=Post.new
+    @post=@topic.posts.new
   end
 
   # GET /posts/1/edit
   def edit
-
   end
 
   # POST /posts or /posts.json
@@ -56,30 +49,20 @@ class PostsController < ApplicationController
     else
       @post=Post.new(post_params)
     end
-    if params[:post][:new_tag_name].present?
-      tag_names = params[:post][:new_tag_name].split(',')
-      tag_names.each do|tag_name|
-      tag=Tag.find_or_create_by(name: tag_name.strip)
-      @post.tags << tag
-      end
-    end
     @post.user= current_user
-    @post.tags << Tag.where(id: params[:post][:tag_ids])
-    @post.image.attach(params[:post][:image])
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post }
-      else
-        render :new
-      end
-      end
+
+    if @post.save
+      new_tag_name
+      redirect_to topic_post_path(@post.topic_id,@post)
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    @post.tags = Tag.where(id: params[:post][:tag_ids])
-
     if @post.update(post_params)
+      new_tag_name
       redirect_to topic_post_path(@post.topic_id,@post)
     else
       render :edit, status: :unprocessable_entity
@@ -98,22 +81,24 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post_and_topic
-      if params[:topic_id]
+  def set_post_and_topic
+    if params[:topic_id]
       @topic=Topic.find(params[:topic_id])
-      @post = @topic.posts.find(params[:id])
-      else
-        @post=Post.find(params[:id])
-      end
+    @post = @topic.posts.find(params[:id])
+    else
+      @post=Post.find(params[:id])
     end
+  end
 
     # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:name, :description, :topic_id, :image,:other_attributes)
+  def post_params
+    params.require(:post).permit(:name, :description, :topic_id, :image, tag_ids: [])
+  end
+  
+  def new_tag_name
+    if params.dig(:post, :new_tag_name)
+      tag= Tag.find_or_create_by(name: params[:post][:new_tag_name])
+      @post.tags << tag
     end
-
-  def set_topic
-    @topic= Topic.find(params[:topic_id])
   end
 end

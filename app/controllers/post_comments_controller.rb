@@ -14,7 +14,7 @@ class PostCommentsController < ApplicationController
   end
 
   def show
-    @comments=@post.post_comments
+
   end
 
   def edit

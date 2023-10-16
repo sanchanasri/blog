@@ -61,7 +61,7 @@
 
 <h3>This post has <%=@post.post_comments.count %> comments</h3>
 <h2>Comments</h2>
-<% @comments.each do |comment| %>
+<% @post.post_comments.includes(:user).each do |comment| %>
   <div class="comment-box">
     <p><strong>Commenter: </strong><%= comment.user.name %></p>
     <p><strong>Comment: </strong><%= comment.description %></p>
