@@ -1,4 +1,18 @@
 <table style="margin: 0 auto; width: 80%; border-collapse: collapse; text-align: center;">
+
+  <%= form_tag posts_path, method: :get do %>
+  <div>
+    <%=label_tag :from_date, 'From Date: ' %>
+    <%= date_field_tag :from_date , (params[:from_date] || 1.day.ago.to_date) %>
+  </div><br>
+    <div>
+      <%= label_tag :to_date, 'To Date: ' %>
+      <%= date_field_tag :to_date , (params[:to_date] || Date.today)%>
+    </div><br>
+    <div>
+      <%= submit_tag 'Show details'%>
+    </div><br>
+  <%end %>
   <thead>
   <tr>
     <th style="background-color: #007bff; color: #fff; padding: 10px;">Posts</th>
@@ -21,26 +35,7 @@
   <% end %>
   </tbody>
 </table><br><br>
-<center>
-  <nav class="pagy-nav pagination">
-    <% if @pagy.prev %>
-      <%= link_to 'Prev', url_for(@pagy.vars[:params].merge(page: @pagy.prev)), class: 'page prev' %>
-    <% else %>
-      <span class="page prev disabled">&lsaquo;&nbsp;Prev</span>
-    <% end %>
-
-    <% @pagy.series.each do |item| %>
-      <% if item.is_a?(Integer) %>
-        <%= link_to item, url_for(@pagy.vars[:params].merge(page: item)), class: 'page' %>
-      <% else %>
-        <span class="page gap"><%= item %></span>
-      <% end %>
-    <% end %>
-
-    <% if @pagy.next %>
-      <%= link_to 'Next', url_for(@pagy.vars[:params].merge(page: @pagy.next)), class: 'page next' %>
-    <% else %>
-      <span class="page next disabled">Next&nbsp;&rsaquo;</span>
-    <% end %>
-  </nav>
-</center><br>
+<nav class="pagy-nav pagination">
+  <%= pagy_nav(@pagy).html_safe %>
+</nav>
+  <br>

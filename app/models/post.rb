@@ -14,12 +14,18 @@ class Post < ApplicationRecord
   def ratings_by_value
     ratings.group(:value).count
   end
+
   def average_rating
     if ratings.present?
-    ratings.average(:value)
+      ratings.average(:value)
     else
       0.0
-      end
+    end
   end
+  scope :created_between,-> (from_date, to_date){
+    to_date = Date.today if to_date.blank?
+    to_date= to_date.to_date
+    where('created_at >= ? and created_at<= ?',from_date,to_date.end_of_day)
+  }
 
 end

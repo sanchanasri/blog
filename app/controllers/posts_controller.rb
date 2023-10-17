@@ -13,8 +13,20 @@ class PostsController < ApplicationController
   end
 
   def index
+    if params[:from_date].blank? && params[:to_date].blank?
+      from_date=1.day.ago.to_date
+      to_date=Date.today
+    else
+      from_date=params[:from_date]
+      to_date=params[:to_date]
+    end
     unless params[:topic_id]
-      @pagy, @posts = pagy(Post.includes(:topic).all, items: 10)
+    if from_date.present?
+      @posts=Post.includes(:topic).created_between(from_date,to_date)
+    else
+      @posts = Post.includes(:topic).where('created_at <= ?', to_date)
+    end
+    @pagy, @posts = pagy(@posts.all, items: 10)
     end
   end
 

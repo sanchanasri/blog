@@ -8,9 +8,19 @@ class TopicsController < ApplicationController
 
   # GET /topics/1 or /topics/1.json
   def show
-
-    @pagy, @posts = pagy(@topic.posts, items: 10)
-
+    if params[:from_date].blank? && params[:to_date].blank?
+      from_date=1.day.ago.to_date
+      to_date=Date.today
+    else
+      from_date=params[:from_date]
+      to_date=params[:to_date]
+    end
+    if from_date.present?
+    @posts=@topic.posts.created_between(from_date,to_date)
+    else
+      @posts = @topic.posts.where('created_at <= ?', to_date)
+    end
+    @pagy, @posts = pagy(@posts, items: 10)
   end
 
   # GET /topics/new
@@ -68,7 +78,6 @@ class TopicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def topic_params
-
       params.require(:topic).permit(:name, :description)
 
     end

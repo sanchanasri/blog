@@ -9,48 +9,9 @@
   <%= render 'posts/index' %>
 </table>
 
-
 <p style="text-align: center;">
   <%= link_to "Create post", new_topic_post_path(@topic), style: "text-decoration: none; font-weight: bold; background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px;" %>
 </p><br>
-<center>
 
 
-<nav class="pagy-nav pagination">
-  <% if @pagy.prev %>
-    <%= link_to 'Prev', url_for(@pagy.vars[:params].merge(page: @pagy.prev)), class: 'page prev' %>
-  <% else %>
-    <span class="page prev disabled">&lsaquo;&nbsp;Prev</span>
-  <% end %>
-
-  <% @pagy.series.each do |item| %>
-    <% if item.is_a?(Integer) %>
-      <%= link_to item, url_for(@pagy.vars[:params].merge(page: item)), class: 'page' %>
-    <% else %>
-      <span class="page gap"><%= item %></span>
-    <% end %>
-  <% end %>
-
-  <% if @pagy.next %>
-    <%= link_to 'Next', url_for(@pagy.vars[:params].merge(page: @pagy.next)), class: 'page next' %>
-  <% else %>
-    <span class="page next disabled">Next&nbsp;&rsaquo;</span>
-  <% end %>
-</nav>
-</center>
-<br><br>
-<div class="btn-toolbar" role="toolbar" aria-label="Post Actions">
-  <div class="btn-group" role="group">
-    <center>
-
-    <%= link_to "Edit this topic", edit_topic_path(@topic), class: "custom-btn yellow-btn" %>
-    <%= link_to "Back", topics_path, class: "custom-btn black-btn" %>
-    <%= link_to "Destroy", topics_path, data: {
-      turbo_method: :delete,
-      turbo_confirm: "Are you sure?",
-    }, class: "custom-btn red-btn destroy-link" %>
-    </center>
-  </div>
-
-</div>
 
