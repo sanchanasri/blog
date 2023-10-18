@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :tags
   has_one_attached :image
   has_and_belongs_to_many :users
+  after_create :update_ratings
 
 
   validates :name, presence: true, length: {maximum: 20}
@@ -15,17 +16,16 @@ class Post < ApplicationRecord
     ratings.group(:value).count
   end
 
-  def average_rating
-    if ratings.present?
-      ratings.average(:value)
-    else
-      0.0
-    end
-  end
   scope :created_between,-> (from_date, to_date){
     to_date = Date.today if to_date.blank?
     to_date= to_date.to_date
     where('created_at >= ? and created_at<= ?',from_date,to_date.end_of_day)
   }
-
+  def update_ratings
+    if ratings.present?
+      update_column(:average_rating, ratings.average(:value))
+    else
+      update_column(:average_rating, 0.0)
+    end
+  end
 end

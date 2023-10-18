@@ -59,7 +59,7 @@
   <% end %>
 </div>
 
-<h3>This post has <%=@post.post_comments.count %> comments</h3>
+<h3>This post has <%=@post.post_comments_count %> comments</h3>
 <h2>Comments</h2>
 <% @post.post_comments.includes(:user).each do |comment| %>
   <div class="comment-box">

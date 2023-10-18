@@ -23,7 +23,7 @@
     <tr class="post">
       <td style="border: 1px solid #ddd; padding: 10px;">
         <div class="post-title" data-post-id="<%= post.id %>" data-topic-id="<%=post.topic_id %>">
-        <%= link_to "#{post.name} (#{post.topic.name})", topic_post_path(post.topic_id, post), style: "text-decoration: none; color: #333; font-weight: bold;" %>
+        <%= link_to "#{post.name} (#{post.topic.name}) <br> comments: #{post.post_comments_count} <br>average rating: #{number_with_precision(post.average_rating, precision: 2)}<br>".html_safe, topic_post_path(post.topic_id, post), style: "text-decoration: none; color: #333; font-weight: bold;" %>
           <% if current_user.posts.include?(post) %>
             <span class="read">Read</span>
           <% else %>
