@@ -8,7 +8,7 @@ gem "rails", "~> 7.0.7", ">= 7.0.7.2"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
-
+gem 'jquery-rails'
 # Use sqlite3 as the database for Active Record
 gem "aws-sdk-s3", require: false
 gem 'bullet', group: 'development'
@@ -76,3 +76,5 @@ group :development do
 
 end
 
+
+gem "rails-ujs", "~> 0.1.0"

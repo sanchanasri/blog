@@ -1,15 +1,14 @@
-<%= form_with(model: [@topic, @post] , remote: true) do |form| %>
+<%= form_with(model: [@topic, @post] , local:false) do |form| %>
 
   <div class="errors"></div>
-
   <div>
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter name" %>
   </div>
 
   <div>
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: "form-control", placeholder: "Enter description" %>
   </div>
 
   <%= render 'tags/new', form: form, post: @post %>
@@ -23,3 +22,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>

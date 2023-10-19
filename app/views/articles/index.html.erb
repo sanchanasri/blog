@@ -1,25 +1,11 @@
-<!-- app/views/articles/index.html.erb -->
+
 Welcome, <%= current_user.email %>
-<%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
 </nav>
-
-<%= stylesheet_link_tag 'articleStyle', media: 'all', 'data-turbolinks-track': 'reload' %>
-
-
 <centre><h2>Blog</h2></centre>
-
-
-
-        <td><%= link_to "View Topics", topics_path %></td><br><br>
-
-        <td><%= link_to "View All Posts", all_posts_path %></td><br><br>
-
-
-
-<table style="margin: 0 auto; width: 80%; border-collapse: collapse; text-align: center;">
+<table class= "table">
   <thead>
   <tr>
     <th style="background-color: #007bff; color: #fff; padding: 10px;">Article Name</th>

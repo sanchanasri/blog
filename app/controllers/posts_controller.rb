@@ -47,6 +47,9 @@ class PostsController < ApplicationController
   def new
     @topic=Topic.find(params[:topic_id])
     @post=@topic.posts.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /posts/1/edit
@@ -65,9 +68,13 @@ class PostsController < ApplicationController
 
     if @post.save
       new_tag_name
-      redirect_to topic_post_path(@post.topic_id,@post)
+      respond_to do |format|
+        format.js
+      end
     else
-      render :new
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
@@ -84,10 +91,8 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     if @post.destroy
-      flash[:notice]="Successfully deleted"
       redirect_to topic_path(@topic)
     else
-      flash[:alert] = 'Unable to delete the story.'
       redirect_to topic_post_path(@topic, @post)
     end
   end
@@ -104,11 +109,11 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:name, :description, :topic_id, :image, tag_ids: [])
+    params.require(:post).permit(:name, :description, :topic_id,:image, tag_ids: [])
   end
   
   def new_tag_name
-    if params.dig(:post, :new_tag_name)
+    if params.dig(:post, :new_tag_name).present?
       tag= Tag.find_or_create_by(name: params[:post][:new_tag_name])
       @post.tags << tag
     end

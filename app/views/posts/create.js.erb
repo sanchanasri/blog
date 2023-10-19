@@ -1,9 +1,8 @@
-
 $("#new_post_button").show();
 $("#new_post").remove();
-<%if @post.errors.any? %>
-alert("error");
-<%else %>
-alert("post successfully created");
+<% if @post.errors.any? %>
+alert("Error creating the post.");
+<% else %>
+alert("post created successfully");
 $("#posts").append("<%= j render "posts/post", post:@post%>");
-<%end %>
+<% end %>

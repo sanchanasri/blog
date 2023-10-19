@@ -7,9 +7,9 @@ application.debug = false
 window.Stimulus   = application
 
 export { application }
-import { Pagy } from 'pagy';
-window.Pagy = Pagy;
 
+import 'jquery'
+import 'jquery_ujs'
 
 //= require_tree .
 //= require post

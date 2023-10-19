@@ -1,11 +1,16 @@
 <br>
-<div class="field">
-  <%= form.label :tag_ids, "Tags" %><br>
-  <% Tag.all.each do |tag| %>
-    <%= check_box_tag "post[tag_ids][]", tag.id, @post.tags.include?(tag) %>
-    <%= tag.name %><br>
-  <% end %>
+
+<div class="dropdown">
+  <label for="tag_select">Tags</label>
+  <select class="form-select" id="tag_select" name="post[tag_ids][]" multiple>
+    <% Tag.all.each do |tag| %>
+      <option value="<%= tag.id %>" <%= 'selected' if @post.tags.include?(tag) %>><%= tag.name %></option>
+    <% end %>
+  </select>
 </div>
+
+
+
 
 <br>
 <div class="field">
