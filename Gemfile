@@ -59,6 +59,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'standard', require: false
+  gem 'letter_opener'
 end
 gem 'factory_bot_rails'
 gem 'rspec'

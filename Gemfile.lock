@@ -147,6 +147,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     lint_roller (1.1.0)
     loofah (2.21.3)
       crass (~> 1.0.2)
@@ -337,6 +341,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails
+  letter_opener
   pagy
   puma (~> 5.0)
   rails (~> 7.0.7, >= 7.0.7.2)
