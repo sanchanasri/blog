@@ -17,6 +17,7 @@
 
   </head>
   <body>
+  <% if user_signed_in? %>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Blog</a>
@@ -26,6 +27,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="nav navbar-nav">
           <li> <%= link_to "Topics", topics_path, class: "nav-link" %></li>
+
           <li><%= link_to "Posts", all_posts_path, class: "nav-link" %></a></li>
           <li>
             <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</a>
@@ -34,6 +36,7 @@
       </div>
     </div>
   </nav>
+    <%end %>
 
     <%= yield %>
     <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
@@ -43,7 +46,7 @@
 
 
 
-
+<%if user_signed_in? %>
   <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -54,16 +57,12 @@
         <div class="modal-body">
           <%= render 'devise/registrations/edit' %>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Update</button>
-          <%= button_to "Cancel my account", registration_path(current_user), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
-        </div>
+
 
       </div>
     </div>
   </div>
-
+<%end %>
 
 
   </body>

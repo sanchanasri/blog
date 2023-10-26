@@ -63,7 +63,7 @@ group :development, :test do
 end
 gem 'factory_bot_rails'
 gem 'rspec'
-
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
